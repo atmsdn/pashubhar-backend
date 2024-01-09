@@ -36,7 +36,7 @@ export const handleAuthOTPInit = async (
         }
 
         const user = await findUser({ phoneNumber });
-        
+
         if (user) {
             const { otp, expiry }: any = generateOTP();
             const userOTPRecord = await createUserOTP(otp, expiry);
@@ -50,8 +50,7 @@ export const handleAuthOTPInit = async (
 
             const title = 'Your OTP'
             const body = `Dear User! Your OTP is ${otp}.`
-           const a= await sendPushNotification(token, title, body)
-            console.log(a,"..............")
+            await sendPushNotification(token, title, body)
             res.status(200).json({ data: encoded });
         } else {
             throw new BadRequestError('User does not exist');
