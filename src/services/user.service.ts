@@ -51,12 +51,21 @@ export const getConstantValue = async () => {
     const constant = await Constant.findAll()
     return constant;
 }
-export const CalculateValue = async (
-    fields1: string,
-    fields2: string,
-    fields3: string,
-    fields4: string,
-    fields5: string
-) => {
-    return Number(fields1) + Number(fields2) + Number(fields3) + Number(fields4) + Number(fields5);
+export const getConstantValueByFilter = async (type: any) => {
+    const constant = await Constant.findAll({
+        where: {
+            type
+        }
+    })
+    return constant;
+}
+export const CalculateValue = async (type: string, fields1: string, fields2: string, fields3: string, fields4: string, fields5: string) => {
+    try {
+        console.log(fields1, fields2, fields3, fields4, fields5)
+        const constantArray = await getConstantValueByFilter(type)
+        return constantArray[0]?.dataValues?.value1 * Number(fields1) + constantArray[0]?.dataValues?.value2 * Number(fields2) + constantArray[0]?.dataValues?.value3 * Number(fields3) + constantArray[0]?.dataValues?.value4 * Number(fields4) + constantArray[0]?.dataValues?.value5 * Number(fields5);
+    } catch (e) {
+        throw new BadRequestError('Something went wrong in calculation');
+    }
+
 }

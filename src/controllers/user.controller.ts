@@ -47,8 +47,8 @@ export const handleCalculateValue = async (
     next: NextFunction
 ) => {
     try {
-        const { field1, field2, field3, field4, field5 } = req.body;
-        const response = await CalculateValue(field1, field2, field3, field4, field5)
+        const { type, field1, field2, field3, field4, field5 } = req.body;
+        const response = await CalculateValue(type, field1, field2, field3, field4, field5)
         res.status(200).json({ data: response });
     }
     catch (ex) {

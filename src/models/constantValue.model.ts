@@ -5,15 +5,27 @@ import { auditColumns } from '../shared/utils/sequelize-model-helper';
 const ConstantValueModel = (sequelize: Sequelize, _Sequelize: any) => {
     const ConstantValue = sequelize.define('ConstantValue', {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+            defaultValue: DataTypes.INTEGER,
         },
-        name: {
-            unique:true,
+        type: {
+            unique: true,
             type: DataTypes.STRING,
         },
-        value: {
+        value1: {
+            type: DataTypes.STRING,
+        },
+        value2: {
+            type: DataTypes.STRING,
+        },
+        value3: {
+            type: DataTypes.STRING,
+        },
+        value4: {
+            type: DataTypes.STRING,
+        },
+        value5: {
             type: DataTypes.STRING,
         },
         ...auditColumns,
